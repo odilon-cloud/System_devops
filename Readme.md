@@ -2,7 +2,7 @@
 
 This is a timeline about linux 
 
-##Table of content
+## Table of content
 
 [NAVIGATION]()
 
@@ -14,7 +14,7 @@ This is a timeline about linux
 
 [KICKSTART]()
 
-#CONTRUBUTING
+## CONTRUBUTING
  
 Pull requests are welcome. for major changes, please open an issue firsrt to discuss what you like to change.
 Please make sure to update tests as appropriate.
