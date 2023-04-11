@@ -1,0 +1,32 @@
+
+DHCP4 CONFIGURATION
+====================
+
+1. #yum -y install dhcp
+#yum list all |grep dhcp to check services that are installed.
+2.#vim /etc/dhcp/dhcpd.conf you dont have a sample file so we have to copy like the following:
+cp /usr/share/doc/dhcp-version(4)/dhcpd.conf.sample /etc/dhcp/dhcpd.conf
+#vim /etc/dhcp/dhcpd.conf
+File opens:
+:set number   --> go straight to line number 47
+Subnet 192.168.10.0 netmask 255.255.255.0 {
+#defaultgateway :
+option Router 192.168.10.1
+option subnt 255.255.255.0
+option doman-name "paci.net"
+option dns 8.8.8.8
+range dynamic 192.168.10.10 192.168.10.254
+default lease time :21600
+max lease time :43200
+reserving ip:
+host Pedro
+{ch
+hardware ethernet 00:as:23:a2:wq:f1
+fixed address 172.16.0.6
+}
+}
+Finally restart dhcpd services 
+chkconfig --list dhcpd to check at which run
+level the dhcpd service is running on.
+chkconfig dhcpd on
+service dhcpd restart
