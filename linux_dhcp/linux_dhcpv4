@@ -13,7 +13,7 @@ Subnet 192.168.10.0 netmask 255.255.255.0 {
 #defaultgateway :
 option Router 192.168.10.1
 option subnt 255.255.255.0
-option doman-name "paci.net"
+option doman-name "odilon.net"
 option dns 8.8.8.8
 range dynamic 192.168.10.10 192.168.10.254
 default lease time :21600
