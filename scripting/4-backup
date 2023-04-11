@@ -1,0 +1,13 @@
+
+#!/bin/bash
+# Set the date
+DATE=$(date +%Y-%m-%d)
+
+# Zip the files in the users' home directories
+zip -r /tmp/backup-$DATE.zip /home/*
+
+# Send the zipped file to the NAS
+scp /tmp/backup-$DATE.zip user@nas:/path/to/backup/directory
+
+# Remove the temporary zipped file
+rm /tmp/backup-$DATE.zip

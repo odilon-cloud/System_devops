@@ -1,0 +1,19 @@
+#!/bin/bash
+# Set the expiry date
+EXPIRY_DATE="2022-03-30"
+
+# Loop to create 10 users
+for i in {1..10}
+do
+    # Create the user
+    sudo useradd user$i
+
+    # Assign a password to the user
+    echo "password" | sudo passwd --stdin user$i
+
+    # Force the user to change their password at first login
+    sudo chage -d 0 user$i
+
+    # Set the account expiry date
+    sudo chage -E $EXPIRY_DATE user$i
+done

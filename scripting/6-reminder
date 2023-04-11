@@ -1,0 +1,13 @@
+#!/bin/bash
+# Set the email subject and content
+SUBJECT="reminder"
+CONTENT="Dear user, please remember to do your assignment in order to develop muscles"
+
+# Loop to send the email to user1-user5
+for i in {1..5}
+do
+    echo "$CONTENT" | mail -s "$SUBJECT" user$i@example.com
+done
+
+# Send the email to yourname@gmail.com
+echo "$CONTENT" | mail -s "$SUBJECT" yourname@gmail.com

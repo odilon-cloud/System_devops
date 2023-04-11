@@ -1,0 +1,6 @@
+#!/bin/bash
+echo -n "Enter the username: "
+read username
+echo -n "Enter the group name: "
+read groupname
+usermod -aG "$groupname" "$username"

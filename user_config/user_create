@@ -1,0 +1,7 @@
+#!/bin/bash
+echo -n "Enter the username: "
+read username
+echo -n "Enter the password: "
+read -s password
+useradd "$username"
+echo "$username:$password" | chpasswd

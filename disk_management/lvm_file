@@ -1,0 +1,67 @@
+a)#fdisk -l
+
+#fdisk /dev/sda
+
+b)Press n : +7000M +7000M +36000M
+:w and #partprobe
+
+c)change the id from 83 to 8e :: 11:83 to 8e, 12:83to 8e, 13:83to 8e
+This process converts the disks into LV
+:w then #partprobe
+
+d)To create a physical volume
+#pvcreate /dev/sda5 /dev/sda6 /dev/sda7 <press enter>
+#pvdisplay --to show the created pv
+
+e)To create volume group
+#vgcreate vg0 /dev/sda5 /dev/sda6 /dev/sda7 
+#vgdisplay --To show existing volume groups
+
+f) To create logical volumes
+
+#lvcreate -L 9000m -n /dev/vg0/lv1 vg0
+#lvcreate -L 9000m -n /dev/vg0/lv2 vg0
+
+#lvdisplay --This will display existing logical volumes
+g)To put filesystem
+#mkfs.ext3 /dev/vg0/lv1 <enter>
+
+=>To mount the filesystem
+
+#mount /dev/vg0/lv1 /mnt
+#vim fstab
+/dev/vg0/lv1 /mnt ext3 defaults 0 0
+:wq
+
+Extending logical volumes
+**************************************************
+1.umount the logical volume of course delete it in the fstab
+as well.
+
+2.lvextend -L +size-in-mb devicename
+#lvextend -L +2000m /dev/vg0/lv1
+This is to add more 2000mb to 9000mb = 11000mb
+
+3.Check the filesystem
+#e2fsck -f /dev/vg0/lv1
+
+4.Resize the filesystem to the added space
+#resize2fs /dev/vg0/lv1
+
+5.Mount the partition now
+#mount /dev/vg0/lv1 /mnt 
+#df -h to check the  capacity
+
+How to reduce the logical volume
+*********************************************
+1.umount the filesystem first #umount /mnt
+2.Check the filesystem
+#e2fsck -f /dev/vg0/lv1
+3.Reduce the size
+#resize2fs /dev/vg0/lv1 4000m
+#df -h to check  the size
+4.Reduce the logical volume after removing file system
+#lvreduce -L 4000m /dev/vg0/lv1
+5.Mount the partition again
+#mount /dev/vg1/lv1 /mnt
+#df -h --to check the storage capacity

@@ -1,0 +1,12 @@
+#!/bin/bash
+# Connect to remote server
+ssh user@remote_server << EOF
+# Zip all files in the remote directory
+zip -r myfiles.zip /path/to/remote/directory/*
+EOF
+
+# Copy the zipped file to the local machine
+scp user@remote_server:/path/to/myfiles.zip /path/to/local/directory
+
+# Unzip the file on the local machine
+unzip /path/to/local/directory/myfiles.zip -d /path/to/local/directory

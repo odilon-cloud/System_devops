@@ -1,0 +1,100 @@
+RAID=Redundant Array of inexpensive disk
+Creating RAID1
+
+1.create two equal partitions in size
+#fdisk -l   ==to show how many disks you have
+#fdisk /dev/sda
+
+/dev/sda5  +2000m
+/dev/sda6  +2000m	
+
+2.change the id to RAID id from 83 to id:fd
+#fdisk /dev/sda
+press t: pick 5 new id fd
+press t: pick 6 new id fd
+3.save changes and exit..#partprobe   or restart the system
+
+4.create RAID1 drive
+
+#mdadm -C /dev/md0 -a yes -l 1 -n 2 /dev/sda5 /dev/sda6
+
+5.Format RAID device and mount iteventually
+
+#mkfs.ext3 /dev/md0
+#mount /dev/md0 /mnt
+
+6.stopping a RAID device
+
+#umount it first
+#mount /dev/md0 /mnt
+#cd /mnt
+#touch data.doc
+Before you stop it you have to umount it..
+#umount /mnt
+#mdadm -S /dev/md0 -->stop it
+raidstart /dev/md0 -->start it again
+#mkdir /disk1
+#mkdir /disk2
+#mount /dev/sda5 /disk1 --Check content
+#mount /dev/sda6 /disk2 --Check content even after doing hot swappable operation
+
+
+
+
+Since RAID is hot swappable if one device is fault you may insert
+another device without shuting the system down.
+
+Adding and removing a device from RAID
+*************************************
+Make one disk fail---when the RAID is on.
+#cat /proc/mdstat --To check if the RAID is running
+
+1.Set one of the disk as faulty
+
+#mdadm /dev/md0 -f /dev/sda8
+
+#Removing  fautly disk from RAID
+
+#mdadm /dev/md0 -r /dev/sda8
+
+3.creating a new disk partition of same size as a faulty one
+and change its id to RAID id as fd RAID partition
+#fdisk /dev/sda
+press :n
+size:+2000m
+press :w
+#partprobe or restart the system
+
+4.Adding a new disk partition to existing RAID
+#mdadm /dev/md0 -a /dev/sda10
+
+5.check if the RAID is active
+#cat /proc/mdstat
+#mdadm -S /dev/md0 --this will stop the RAID
+To restart:
+#mdadm -C /dev/md0 -a yes -l 1 -n 2 /dev/sda9 /dev/sda10
+
+#mkdir /disk1
+#mkdir /disk2
+#mount /dev/sda5 /disk1 --Check content
+#mount /dev/sda10 /disk2 --Check content even after doing hot swappable operation
+raid 5
+1.create 3 partions, change id from 83 to fd then :wq #partprobe
+
+2.create RAID5
+#mdadm -C /dev/md0 -a yes -l 5 -n 3 /dev/sda10 /dev/sda11 /dev/sda12
+3.Format the RAID
+#mkfs.ext3 /dev/md0
+4.Mount /dev/md0 /mnt ==> From here touch file.txt
+
+Adding and removing disk from RAID5
+***********************************
+1.damage /dev/sda12
+#mdadm /dev/md0 -f /dev/sda12
+2.add a new device #fdisk /dev/sda13 --change id 83 to fd
+But you must remove /dev/sda12
+#mdadm /dev/md0 -r /dev/sda12
+3.add created device to RAID5 /dev/sda13
+#mdadm /dev/md0 -a /dev/sda13
+4.Make sure you dont stop the RAID5 let it continually run 
+because you are doing hot swappable operation.

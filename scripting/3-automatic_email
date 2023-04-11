@@ -1,0 +1,20 @@
+#!/bin/bash
+# Set the threshold for used space
+THRESHOLD=20
+
+# Get the used space on the root partition
+USED_SPACE=$(df / | tail -1 | awk '{print $5}' | sed 's/%//')
+
+# Check if the used space is above the threshold
+if [ $USED_SPACE -gt $THRESHOLD ]
+then
+    # Send an email to the system administrator
+    echo "Root partition is ${USED_SPACE}% full" | mail -s "Disk Space Alert" admin@example.com
+
+    # Send an SMS to the system administrator
+    curl -X POST https://api.twilio.com/2010-04-01/Accounts/ACCOUNT_SID/Messages.json \
+    --data-urlencode "To=+25078000000" \
+    --data-urlencode "From=+0987654321" \
+    --data-urlencode "Body=Root partition is ${USED_SPACE}% full" \
+    -u ACCOUNT_SID:AUTH_TOKEN
+fi
