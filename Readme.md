@@ -4,15 +4,17 @@ This is a timeline about linux
 
 ## Table of content
 
-[NAVIGATION]()
+[1. SCRIPTING](https://github.com/odilon-cloud/System_devops/tree/main/scripting)
 
-[USER MANAGEMENT](https://google.com)
+[USER MANAGEMENT](https://github.com/odilon-cloud/System_devops/tree/main/user_config)
 
-[DNS]()
+[DHCP](https://github.com/odilon-cloud/System_devops/tree/main/linux_dhcp)
 
-[RAID]()
+[RAID](https://github.com/odilon-cloud/System_devops/blob/main/disk_management/raid_1_and5)
 
-[KICKSTART]()
+[KICKSTART](https://github.com/odilon-cloud/System_devops/tree/main/auto_kick)
+
+[LVM](https://github.com/odilon-cloud/System_devops/blob/main/disk_management/lvm_file)
 
 ## CONTRUBUTING
  
