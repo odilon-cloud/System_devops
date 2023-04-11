@@ -6,15 +6,15 @@ This is a timeline about linux
 
 [1. SCRIPTING](https://github.com/odilon-cloud/System_devops/tree/main/scripting)
 
-[USER MANAGEMENT](https://github.com/odilon-cloud/System_devops/tree/main/user_config)
+[2. USER MANAGEMENT](https://github.com/odilon-cloud/System_devops/tree/main/user_config)
 
-[DHCP](https://github.com/odilon-cloud/System_devops/tree/main/linux_dhcp)
+[3. DHCP](https://github.com/odilon-cloud/System_devops/tree/main/linux_dhcp)
 
-[RAID](https://github.com/odilon-cloud/System_devops/blob/main/disk_management/raid_1_and5)
+[4. RAID](https://github.com/odilon-cloud/System_devops/blob/main/disk_management/raid_1_and5)
 
-[KICKSTART](https://github.com/odilon-cloud/System_devops/tree/main/auto_kick)
+[5. KICKSTART](https://github.com/odilon-cloud/System_devops/tree/main/auto_kick)
 
-[LVM](https://github.com/odilon-cloud/System_devops/blob/main/disk_management/lvm_file)
+[6. LVM](https://github.com/odilon-cloud/System_devops/blob/main/disk_management/lvm_file)
 
 ## CONTRUBUTING
  
